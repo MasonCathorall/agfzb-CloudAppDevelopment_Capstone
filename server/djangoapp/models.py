@@ -12,7 +12,7 @@ from django.utils.timezone import now
 # - __str__ method to print a car make object
 class CarMake(models.Model):
     name = models.CharField(null=False, max_length=50)
-    description = models.CharField(null=True, max_length=500)
+    description = models.CharField(blank=True, max_length=500)
 
     def __str__(self):
         return self.name
@@ -31,32 +31,31 @@ class CarModel(models.Model):
     name = models.CharField(null=False, max_length=50)
     dealer_id = models.IntegerField(null=True)
 
-    SEDAN = "Sedan"
-    SUV = "SUV"
-    WAGON = "Wagon"
-    SPORT = "Sport"
-    COUPE = "Coupe"
-    MINIVAN = "Mini"
-    VAN = "Van"
-    PICKUP = "Pickup"
-    TRUCK = "Truck"
-    BIKE = "Bike"
-    SCOOTER = "Scooter"
-    OTHER = "Other"
-    CAR_CHOICES = [(SEDAN, "Sedan"), 
-                   (SUV, "SUV"), 
-                   (WAGON, "Station wagon"), 
-                   (SPORT, "Sports Car"),
-                   (COUPE, "Coupe"), 
-                   (MINIVAN, "Mini van"), 
-                   (VAN, "Van"), 
-                   (PICKUP, "Pick-up truck"),
-                   (TRUCK, "Truck"), 
-                   (BIKE, "Motor bike"), 
-                   (SCOOTER, "Scooter"), 
+    SEDAN = 'sedan'
+    SUV = 'suv'
+    WAGON = 'wagon'
+    SPORT = 'sport'
+    COUPE = 'coupe'
+    MINIVAN = 'mini'
+    VAN = 'van'
+    PICKUP = 'pickup'
+    TRUCK = 'truck'
+    BIKE = 'bike'
+    SCOOTER = 'scooter'
+    OTHER = 'other'
+    CAR_CHOICES = [(SEDAN, 'Sedan'), 
+                   (SUV, 'SUV'), 
+                   (WAGON, 'Station wagon'), 
+                   (SPORT, 'Sports Car'),
+                   (COUPE, 'Coupe'), 
+                   (MINIVAN, 'Mini van'), 
+                   (VAN, 'Van'), 
+                   (PICKUP, 'Pick-up truck'),
+                   (TRUCK, 'Truck'), 
+                   (BIKE, 'Motor Bike'), 
+                   (SCOOTER, 'Scooter'), 
                    (OTHER, 'Other')]
-    model_type = models.CharField(
-        null=False, max_length=15, choices=CAR_CHOICES, default=SEDAN)
+    model_type = models.CharField(null=False, max_length=15, choices=CAR_CHOICES, default=SEDAN)
 
     YEAR_CHOICES = []
     for r in range(1969, (datetime.datetime.now().year+1)):
@@ -70,37 +69,6 @@ class CarModel(models.Model):
 
 
 # <HINT> Create a plain Python class `CarDealer` to hold dealer data
-class CarDealer:
-    def __init__(self, address, city, full_name, id, lat, long, short_name, st, state, zip):
-        self.address = address
-        self.city = city
-        self.full_name = full_name
-        self.id = id 
-        self.lat = lat
-        self.long = long
-        self.short_name = short_name
-        self.st = st
-        self.state = state  
-        self.zip = zip
-        self.idx = 0
-
-    def __str__(self):
-        return self.full_name + ", " + self.state
 
 
 # <HINT> Create a plain Python class `DealerReview` to hold review data
-class DealerReview:
-    def __init__(self, dealership, id, name, purchase, review, car_make=None, car_model=None, car_year=None, purchase_date=None, sentiment="neutral"):
-        self.car_make = car_make
-        self.car_model = car_model
-        self.car_year = car_year
-        self.dealership = dealership
-        self.id = id  
-        self.name = name  
-        self.purchase = purchase  
-        self.purchase_date = purchase_date
-        self.review = review  
-        self.sentiment = sentiment 
-
-    def __str__(self):
-        return "Reviewer: " + self.name + " Review: " + self.review
