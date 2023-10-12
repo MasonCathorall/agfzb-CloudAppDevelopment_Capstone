@@ -33,3 +33,17 @@ def main(param_dict):
         return {"error": err}
 
     return {"dbs": client.all_dbs()}
+
+
+# my_database = client['reviews'] to select the reviews database
+
+# for document in my_database: to get all info
+#     print(document)
+
+# Retrieve documents where the name field is 'foo'
+# selector = {'name': {'$eq': 'foo'}}
+# docs = my_database.get_query_result(selector)
+# if selector:
+#   then http GET method
+# else:
+#   then http POST method
